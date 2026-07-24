@@ -46,7 +46,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
         header h1 {
@@ -63,6 +63,26 @@
         header p {
             color: var(--twitch-text-alt);
             font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .twitch-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--twitch-purple);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .twitch-btn:hover {
+            background-color: var(--twitch-purple-hover);
+            transform: translateY(-2px);
         }
 
         .goals-list {
@@ -135,6 +155,9 @@
         <header>
             <h1>Follow Goals de <span>Rozuya</span></h1>
             <p>La liste de tous les paliers et des événements spéciaux prévus en live !</p>
+            <a href="https://www.twitch.tv/hol_rozuya" target="_blank" class="twitch-btn">
+                🔗 Suivre la chaîne Twitch
+            </a>
         </header>
 
         <div class="goals-list">
@@ -150,10 +173,10 @@
             <!-- 200 -->
             <div class="goal-card">
                 <div class="goal-header">
-                    <span class="goal-title">LE CHAT CHOISIT MON PROCHAIN JEU</span>
+                    <span class="goal-title">LE CHAT CHOISIT MON PROCHAIN JEU 🎮</span>
                     <span class="goal-badge">200 FOLLOWS</span>
                 </div>
-                <div class="goal-desc">Parmi une liste de jeux sélectionnés 🎮</div>
+                <div class="goal-desc">Parmi une liste de jeux sélectionnés.</div>
             </div>
 
             <!-- 250 -->
@@ -171,7 +194,7 @@
                     <span class="goal-title">TRIBUNAL DES SETUPS 📸</span>
                     <span class="goal-badge">300 FOLLOWS</span>
                 </div>
-                <div class="goal-desc">Les viewers t'envoient une photo de leur bureau/chambre sur Discord et tu notes ça en direct.</div>
+                <div class="goal-desc">Les viewers t'envoient une photo de leur bureau ou chambre sur Discord et tu notes ça en direct.</div>
             </div>
 
             <!-- 350 -->
@@ -215,7 +238,7 @@
                     <span class="goal-title">SOIRÉE BLIND TEST 🎵</span>
                     <span class="goal-badge">550 FOLLOWS</span>
                 </div>
-                <div class="goal-desc">Tu lances des musiques de jeux vidéo, films ou animes, le premier du chat qui trouve gagne des points.</div>
+                <div class="goal-desc">Tu lances des musiques de jeux vidéo, films ou animes sur YouTube/Spotify, le premier du chat qui trouve gagne des points.</div>
             </div>
 
             <!-- 600 -->
@@ -293,7 +316,7 @@
             <div class="goal-card" style="border-color: var(--twitch-purple); background-color: rgba(145, 70, 255, 0.05);">
                 <div class="goal-header">
                     <span class="goal-title" style="font-weight: 800;">GRAND TOURNOI 1V1 REALISTIC FORTNITE (50€ DE V-BUCKS) 🏆</span>
-                    <span class="goal-badge" style="background-color: #ffbf00; color: #000;">1000 FOLLOWS (1K) !</span>
+                    <span class="goal-badge" style="background-color: #ffbf00; color: #000;">1000 FOLLOWS (1K)</span>
                 </div>
                 <div class="goal-desc">Le boss de fin : un tournoi compétitif ultra intense pour célébrer le cap des 1K !</div>
             </div>
@@ -301,7 +324,7 @@
         </div>
 
         <div class="stats-footer">
-            Chaîne Twitch de <span class="highlight">Rozuya</span>
+            Chaîne Twitch de <span class="highlight">Rozuya</span> (hol_rozuya)
         </div>
     </div>
 
