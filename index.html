@@ -380,37 +380,40 @@
         </div>
     </div>
 
-    <!-- SCRIPT STREAMELEMENTS PRÉCIS ET FIABLE -->
+    <!-- SCRIPT IVR API (100% PUBLIQUE ET SANS INSCRIPTION) -->
     <script>
         const TWITCH_CHANNEL = 'hol_rozuya';
         const GOAL_MAX = 1000;
 
         async function updateFollowers() {
             try {
-                const response = await fetch(`https://api.streamelements.com/kappa/v2/channels/${TWITCH_CHANNEL}`);
-                if (!response.ok) throw new Error("Impossible de contacter StreamElements");
-
+                // Requête vers l'API IVR (très fiable pour Twitch)
+                const response = await fetch(`https://api.ivr.fi/v2/twitch/user?login=${TWITCH_CHANNEL}`);
+                
+                if (!response.ok) throw new Error("Erreur avec l'API IVR");
+                
                 const data = await response.json();
-
-                if (data && data.stats && typeof data.stats.followers !== 'undefined') {
-                    const count = data.stats.followers;
-
-                    // Mise à jour du texte du compteur
+                
+                // L'API renvoie un tableau, on récupère le premier élément
+                if (data && data.length > 0 && typeof data[0].followers !== 'undefined') {
+                    const count = data[0].followers;
+                    
+                    // Met à jour le texte
                     document.getElementById('follower-count').innerText = count;
-
-                    // Ajustement automatique de la barre violette (sur un max de 1000)
+                    
+                    // Met à jour la barre de progression
                     const percentage = Math.min((count / GOAL_MAX) * 100, 100);
                     document.getElementById('progress-fill').style.width = `${percentage}%`;
                 }
             } catch (error) {
-                console.error("Erreur d'actualisation des followers :", error);
+                console.error("Erreur de récupération :", error);
             }
         }
 
-        // Lancement immédiat
+        // Lancement au démarrage
         updateFollowers();
 
-        // Rafraîchissement automatique toutes les 5 secondes (5000 ms)
+        // Rafraîchissement automatique toutes les 5 secondes
         setInterval(updateFollowers, 5000);
     </script>
 </body>
