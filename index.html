@@ -86,7 +86,7 @@
         }
 
         .counter-number {
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             font-weight: 800;
             color: #ffffff;
             line-height: 1;
@@ -94,9 +94,9 @@
 
         .progress-bar-bg {
             width: 100%;
-            height: 10px;
+            height: 12px;
             background-color: var(--twitch-border);
-            border-radius: 5px;
+            border-radius: 6px;
             overflow: hidden;
             margin-top: 15px;
         }
@@ -380,34 +380,38 @@
         </div>
     </div>
 
-    <!-- SCRIPT AUTO-UPDATE STREAM -->
+    <!-- SCRIPT STREAMELEMENTS PRÉCIS ET FIABLE -->
     <script>
         const TWITCH_CHANNEL = 'hol_rozuya';
         const GOAL_MAX = 1000;
 
-        async function updateFollowCount() {
+        async function updateFollowers() {
             try {
-                const response = await fetch(`https://decapi.me/twitch/follow_count/${TWITCH_CHANNEL}`);
-                const data = await response.text();
-                const count = parseInt(data, 10);
+                const response = await fetch(`https://api.streamelements.com/kappa/v2/channels/${TWITCH_CHANNEL}`);
+                if (!response.ok) throw new Error("Impossible de contacter StreamElements");
 
-                if (!isNaN(count)) {
-                    document.getElementById('follower-count').innerText = count.toLocaleString('fr-FR');
-                    
-                    // Calcul du pourcentage de remplissage de la barre (sur 1000)
+                const data = await response.json();
+
+                if (data && data.stats && typeof data.stats.followers !== 'undefined') {
+                    const count = data.stats.followers;
+
+                    // Mise à jour du texte du compteur
+                    document.getElementById('follower-count').innerText = count;
+
+                    // Ajustement automatique de la barre violette (sur un max de 1000)
                     const percentage = Math.min((count / GOAL_MAX) * 100, 100);
                     document.getElementById('progress-fill').style.width = `${percentage}%`;
                 }
-            } catch (err) {
-                console.error("Erreur de récupération du nombre de followers :", err);
+            } catch (error) {
+                console.error("Erreur d'actualisation des followers :", error);
             }
         }
 
-        // Lancement immédiat au chargement de la page
-        updateFollowCount();
+        // Lancement immédiat
+        updateFollowers();
 
-        // Vérification automatique toutes les 5 secondes (5000 ms)
-        setInterval(updateFollowCount, 5000);
+        // Rafraîchissement automatique toutes les 5 secondes (5000 ms)
+        setInterval(updateFollowers, 5000);
     </script>
 </body>
 </html>
